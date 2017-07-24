@@ -19,6 +19,79 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submitBtn {
+  -webkit-appearance: none;
+  background: none;
+  border: 1px solid salmon;
+  color: salmon;
+  border-radius: 10px;
+  box-shadow: 3px 3px 1px #888888;
+  transition: all .5s;
+}
+
+.submitBtn:hover {
+  background: salmon;
+  color: white;
+  cursor: pointer;
+  box-shadow: 10px 10px 5px #888888;
+  transition: all .5s;
+}
+
+.inputAction {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.todoInput {
+  font-size: 2rem;
+  border-radius: 5px;
+  border: 1px solid salmon;
+  outline: none;
+  margin: 5%;
+  padding: 2%;
+}
+
+.submitBtn {
+  width: 25%;
+  margin: 0 auto;
+  padding: 2%;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.todoContainer {
+  margin-top: 5%;
+}
+
+.todoItem {
+  margin: 2%;
+  padding-left: 2%;
+  font-size: 2rem;
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  opacity: 1;
+  color: lightgray;
+  transition: all 1s;
+}
+
+.deleteBtn:hover {
+  opacity: 1;
+  color: red;
+  display: inline;
+  transition: all 1s;
+  cursor: pointer;
 }

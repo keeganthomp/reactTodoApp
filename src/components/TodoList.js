@@ -32,24 +32,33 @@ class TodoList extends Component {
 
   deleteTodo = e => {
     let index = e.target.id;
-    console.log("index ", index);
     let todoArr = this.state.todoList;
-    console.log("todoArr ", todoArr);
     todoArr.splice(index, 1);
-    console.log("deleting");
+    this.setState({ todoList: todoArr });
   };
 
   render() {
     return (
       <div className="todoWrapper">
-        <input
-          className="todoInput"
-          type="text"
-          onKeyUp={this.getTodoContent}
-        />
-        <input type="submit" onClick={this.handleSubmit} />
+        <div className="inputAction">
+          <input
+            className="todoInput"
+            type="text"
+            onKeyUp={this.getTodoContent}
+          />
+          <input
+            className="submitBtn"
+            type="submit"
+            value="Add Todo"
+            onClick={this.handleSubmit}
+          />
+        </div>
         <div className="todoList">
-          <TodoItem todos={this.state.todoList} delete={this.deleteTodo} />
+          <TodoItem
+            todos={this.state.todoList}
+            delete={this.deleteTodo}
+            edit={this.editTodo}
+          />
         </div>
       </div>
     );
