@@ -4,16 +4,16 @@ import "../styles/App.css";
 class TodoItem extends Component {
   render() {
     let todos = this.props.todos.map(e => {
+      let index = this.props.todos.indexOf(e);
       return (
-        <div key={e}>
-          <li>
-            {e}
-          </li>
+        <div key={Math.random()}>
+          {e}
+          <button id={index} onClick={this.props.delete}>delete</button>
         </div>
       );
     });
     return (
-      <div>
+      <div className="todoContainer">
         {todos}
       </div>
     );
