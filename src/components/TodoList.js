@@ -36,7 +36,7 @@ class TodoList extends Component {
         <input className="todoInput" type="text" onKeyUp={this.getTodoContent} />
         <input type="submit" onClick={this.handleSubmit} />
         <div className="todoList">
-          <TodoItem />
+          <TodoItem todos={this.state.todoList}/>
         </div>
       </div>
     );
