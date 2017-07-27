@@ -95,3 +95,23 @@
   transition: all 1s;
   cursor: pointer;
 }
+
+.editButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  opacity: 1;
+  color: lightgray;
+  transition: all 1s;
+  outline: none;
+}
+
+
+.editButton:hover {
+  opacity: 1;
+  color: lightseagreen;
+  display: inline;
+  transition: all 1s;
+  cursor: pointer;
+  outline: none;  
+}
