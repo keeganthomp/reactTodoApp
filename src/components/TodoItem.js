@@ -6,13 +6,12 @@ class TodoItem extends Component {
     super(props);
     this.state = {
       index: undefined,
-      todo: {}
+      todo: {},
     };
   }
 
   editTodo = e => {
     let index = e.target.id;
-    console.log("index ", index);
     let todoList = this.props.todos;
     let item = todoList[index];
     item.isBeingEdited = true;
@@ -23,14 +22,12 @@ class TodoItem extends Component {
 
   getUpdateTodoContent = e => {
     let updateTodoValue = e.target.value;
-    this.setState({ todo: {title: updateTodoValue, isBeingEdited: true }});
+    this.setState({ todo: { title: updateTodoValue, isBeingEdited: true } });
   };
 
   updateTodo = e => {
     this.props.todos[this.state.index] = this.state.todo;
     this.props.todos[this.state.index].isBeingEdited = false;
-    
-    console.log(this.props.todos)
   };
 
   render() {

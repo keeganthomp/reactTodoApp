@@ -19,10 +19,7 @@ class TodoList extends Component {
     let input = e.target.value;
     let newItem = { title: input, isBeingEdited: false };
     this.setState({ todoItem: newItem });
-    console.log(this.state.todoItem);
   };
-
-  
 
   handleSubmit = e => {
     let todoArr = this.state.todoList;
@@ -31,18 +28,14 @@ class TodoList extends Component {
     this.setState({ todoItem: "" });
     let todoInput = document.querySelector(".todoInput");
     todoInput.value = "";
-    console.log(todoArr);
   };
 
   deleteTodo = e => {
     let index = e.target.id;
-    console.log("index ", index);
     let todoArr = this.state.todoList;
     todoArr.splice(index, 1);
     this.setState({ todoList: todoArr });
   };
-
-  
 
   render() {
     return (
