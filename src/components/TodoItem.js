@@ -22,12 +22,17 @@ class TodoItem extends Component {
 
   getUpdateTodoContent = e => {
     let updateTodoValue = e.target.value;
-    this.setState({ todo: { title: updateTodoValue, isBeingEdited: true } });
+    if(e.which === 13){
+      console.log(":::,", this.props.todos[this.state.index])
+    this.props.todos[this.state.index].title = updateTodoValue;
+    this.props.todos[this.state.index].isBeingEdited = false;
+    } else {
+      console.log("press Enter")
+    }
   };
 
   updateTodo = e => {
-    this.props.todos[this.state.index] = this.state.todo;
-    this.props.todos[this.state.index].isBeingEdited = false;
+    
   };
 
   render() {
@@ -56,9 +61,6 @@ class TodoItem extends Component {
               className="updateInput"
               type="text"
             />
-            <button id={i} onClick={this.updateTodo} className="editButton">
-              Update
-            </button>
           </div>
         );
       }
