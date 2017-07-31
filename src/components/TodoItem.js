@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/App.css";
 import TodoList from "./TodoList";
+import Radium from 'radium';
 
 class TodoItem extends Component {
   constructor(props) {
@@ -66,9 +67,28 @@ class TodoItem extends Component {
   };
 
   render() {
+    let input = {
+      borderRadius: 5,
+      outline: "none",
+      border: "1px solid lightGreen",
+      textAlign: "center",
+      margin: 5,
+      fontSize: "2rem"
+    };
+
+    let submitButton = {
+      border: "none",
+      fontSize: "2rem",
+      backgroundColor: "white",
+      ':hover': {
+        cursor: "pointer",
+        color: "lightGreen"
+      }
+    }
+
     return (
       <div>
-        <input
+        <input  style={input}
           type="text"
           placeholder="Todo Title"
           onKeyUp={this.getCurrentTodo}
@@ -76,7 +96,7 @@ class TodoItem extends Component {
           className="titleInput"
         />
         <br />
-        <input
+        <input style={input}
           type="text"
           placeholder="Description"
           name="description"
@@ -84,7 +104,7 @@ class TodoItem extends Component {
           onKeyUp={this.getCurrentTodo}
         />
         <br />
-        <button onClick={this.submitNewTodo}>Add Todo</button>
+        <button style={submitButton} onClick={this.submitNewTodo}><i className="fa fa-plus-circle" aria-hidden="true"></i></button>
         <TodoList
           todos={this.state.todos}
           delete={this.deleteTodo}
@@ -97,4 +117,4 @@ class TodoItem extends Component {
   }
 }
 
-export default TodoItem;
+export default Radium(TodoItem);
