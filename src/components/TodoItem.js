@@ -49,19 +49,21 @@ class TodoItem extends Component {
 
   handleUpdate = e => {
     let newTodoContent = e.target.value;
-    console.log("newTodoContent ", newTodoContent);
+    let todo = this.state.todoItem;
+    todo[e.target.name] = e.target.value;
     let todos = this.state.todos;
-    todos[this.state.index].title = newTodoContent;
+    if (e.target.name === "title") {
+      todos[this.state.index].title = newTodoContent;
+    } else if (e.target.name === "description") {
+      todos[this.state.index].description = newTodoContent;
+    }
+    if (e.which === 13) {
+      let todos = this.state.todos;
+      let index = this.state.index;
+      todos[index].isBeingEdited = false;
+      this.setState({ todos });
+    }
   };
-
-  // submitNewTodo = e => {
-  //   if (e.which === 13) {
-  //     let todos = this.state.todos;
-  //     let index = this.state.index;
-  //     todos[index].isBeingEdited = false;
-  //     this.setState({ todos });
-  //   }
-  // };
 
   render() {
     return (

@@ -28,7 +28,8 @@ class TodoList extends Component {
         return (
           <div key={Math.random()}>
             <hr />
-            <input onChange={this.props.update} type="text" />
+            <input name="title" onKeyUp={this.props.update} type="text" />
+            <input name="description" onKeyUp={this.props.update} type="text" />
             <hr />
           </div>
         );
