@@ -1,73 +1,95 @@
 import React, { Component } from "react";
 import "../styles/App.css";
+import TodoList from "./TodoList";
 
 class TodoItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: undefined,
-      todo: {},
+      todos: [{ title: "eat pickles", description: "Eat Those Pickles" }],
+      todoItem: { title: "", description: "", isBeingEdited: false },
+      index: null
     };
   }
 
+  getCurrentTodo = e => {
+    let todo = this.state.todoItem;
+    todo[e.target.name] = e.target.value;
+    todo.isBeingEdited = false;
+    this.setState({ todoItem: todo });
+    console.log(this.state.todoItem);
+  };
+
+  submitNewTodo = e => {
+    let newTodo = this.state.todoItem;
+    let todos = this.state.todos;
+    let clearTodo = {};
+    let titleInput = document.querySelector(".titleInput");
+    let descriptionInput = document.querySelector(".description");
+    titleInput.value = "";
+    descriptionInput.value = "";
+    todos.push(newTodo);
+    this.setState({ todos });
+    this.setState({ todoItem: clearTodo });
+  };
+
+  deleteTodo = e => {
+    let index = e.target.id;
+    let todos = this.state.todos;
+    todos.splice(index, 1);
+    this.setState({ todos });
+  };
+
   editTodo = e => {
     let index = e.target.id;
-    let todoList = this.props.todos;
-    let item = todoList[index];
-    item.isBeingEdited = true;
     this.setState({ index });
-    this.setState({ todoBeingEdited: item });
-    // console.log("todoBeingEdited:", this.state.todoBeingEdited);
+    let todos = this.state.todos;
+    todos[index].isBeingEdited = true;
   };
 
-  getUpdateTodoContent = e => {
-    let updateTodoValue = e.target.value;
-    if(e.which === 13){
-      console.log(":::,", this.props.todos[this.state.index])
-    this.props.todos[this.state.index].title = updateTodoValue;
-    this.props.todos[this.state.index].isBeingEdited = false;
-    } else {
-      console.log("press Enter")
-    }
+  handleUpdate = e => {
+    let newTodoContent = e.target.value;
+    console.log("newTodoContent ", newTodoContent);
+    let todos = this.state.todos;
+    todos[this.state.index].title = newTodoContent;
   };
 
-  updateTodo = e => {
-    
-  };
+  // submitNewTodo = e => {
+  //   if (e.which === 13) {
+  //     let todos = this.state.todos;
+  //     let index = this.state.index;
+  //     todos[index].isBeingEdited = false;
+  //     this.setState({ todos });
+  //   }
+  // };
 
   render() {
-    let todos = this.props.todos.map((e, i) => {
-      if (e.isBeingEdited === false) {
-        return (
-          <div key={Math.random()} className="todoItem">
-            {e.title}
-            <button
-              id={i}
-              className="deleteBtn slide"
-              onClick={this.props.delete}
-            >
-              <span className="fa fa-trash" />
-            </button>
-            <button id={i} onClick={this.editTodo} className="editButton">
-              Edit
-            </button>
-          </div>
-        );
-      } else {
-        return (
-          <div key={Math.random()}>
-            <input
-              onKeyUp={this.getUpdateTodoContent}
-              className="updateInput"
-              type="text"
-            />
-          </div>
-        );
-      }
-    });
     return (
-      <div className="todoContainer">
-        {todos}
+      <div>
+        <input
+          type="text"
+          placeholder="Todo Title"
+          onKeyUp={this.getCurrentTodo}
+          name="title"
+          className="titleInput"
+        />
+        <br />
+        <input
+          type="text"
+          placeholder="Description"
+          name="description"
+          className="description"
+          onKeyUp={this.getCurrentTodo}
+        />
+        <br />
+        <button onClick={this.submitNewTodo}>Add Todo</button>
+        <TodoList
+          todos={this.state.todos}
+          delete={this.deleteTodo}
+          edit={this.editTodo}
+          update={this.handleUpdate}
+          submitNewTodo={this.submitNewTodo}
+        />
       </div>
     );
   }

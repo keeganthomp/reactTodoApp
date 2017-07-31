@@ -1,69 +1,42 @@
 import React, { Component } from "react";
 import "../styles/App.css";
-import TodoItem from "./TodoItem";
 
 class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todoItem: { tite: "", isBeingEdited: false },
-      todoList: [],
-      todoBeingEdited: ""
-    };
-
-    this.getTodoContent = this.getTodoContent.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  getTodoContent = e => {
-    let input = e.target.value;
-    let newItem = { title: input, isBeingEdited: false };
-    this.setState({ todoItem: newItem });
-  };
-
-  handleSubmit = e => {
-    let todoArr = this.state.todoList;
-    todoArr.push(this.state.todoItem);
-    this.setState({ todoList: todoArr });
-    this.setState({ todoItem: "" });
-    let todoInput = document.querySelector(".todoInput");
-    todoInput.value = "";
-  };
-
-  deleteTodo = e => {
-    let index = e.target.id;
-    let todoArr = this.state.todoList;
-    todoArr.splice(index, 1);
-    this.setState({ todoList: todoArr });
-  };
-
   render() {
+    let todos = this.props.todos.map((e, i) => {
+      if (!e.isBeingEdited) {
+        return (
+          <div key={i}>
+            <hr />
+            <p>
+              {e.title}
+            </p>
+            <p>
+              {e.description}
+            </p>
+            <br />
+            <button id={i} onClick={this.props.delete}>
+              Delete
+            </button>
+            <button id={i} onClick={this.props.edit}>
+              Edit
+            </button>
+            <hr />
+          </div>
+        );
+      } else {
+        return (
+          <div key={Math.random()}>
+            <hr />
+            <input onChange={this.props.update} type="text" />
+            <hr />
+          </div>
+        );
+      }
+    });
     return (
-      <div className="todoWrapper">
-        <div className="inputAction">
-          <input
-            className="todoInput"
-            type="text"
-            name="todo"
-            onKeyUp={this.getTodoContent}
-          />
-          <input
-            className="submitBtn"
-            type="submit"
-            value="Add Todo"
-            onClick={this.handleSubmit}
-          />
-        </div>
-        <div className="todoList">
-          <TodoItem
-            getContent={this.updateTodo}
-            submit={this.handleSubmit}
-            todos={this.state.todoList}
-            delete={this.deleteTodo}
-            edit={this.editTodo}
-            handleUpdateTodo={this.handleUpdateTodo}
-          />
-        </div>
+      <div>
+        {todos}
       </div>
     );
   }
